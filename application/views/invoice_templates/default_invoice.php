@@ -66,9 +66,9 @@
                             <?php if ($invoice->user_state) { echo $invoice->user_state . ' '; } ?>
                             <?php if ($invoice->user_zip) { echo $invoice->user_zip . '<br>'; } ?>
                             <?php if ($invoice->user_phone) { ?><abbr>P:</abbr><?php echo $invoice->user_phone; ?><br><?php } ?>
-                            <?php if ($invoice->user_fax) { ?><abbr>F:</abbr><?php echo $invoice->user_fax; ?><?php } ?>
-							<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->gebruiker_custom_btw; ?><?php } ?>
-							<?php if ($invoice->gebruiker_custom_rpr) { ?><abbr>RPR: </abbr><?php echo $invoice->gebruiker_custom_rpr; ?><?php } ?>
+                            <?php if ($invoice->user_fax) { ?><abbr>F:</abbr><?php echo $invoice->user_fax; ?><br><?php } ?>
+							<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->gebruiker_custom_btw; ?><br><?php } ?>
+							<?php if ($invoice->gebruiker_custom_rpr) { ?><abbr>RPR: </abbr><?php echo $invoice->gebruiker_custom_rpr; ?><br><?php } ?>
                         </p>
                     </td>
                     <td style="text-align: right;"><h2><?php echo lang('invoice'); ?> <?php echo $invoice->invoice_number; ?></h2></td>
