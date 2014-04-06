@@ -87,7 +87,7 @@
                             <?php if ($invoice->client_state) { echo $invoice->client_state . ' '; } ?>
                             <?php if ($invoice->client_zip) { echo $invoice->client_zip . '<br>'; } ?>
                             <?php if ($invoice->client_phone) { ?><abbr>P:</abbr><?php echo $invoice->client_phone; ?><br><?php } ?>
-<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->klant_custom_btw; ?><?php } ?>
+							<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->klant_custom_btw; ?><?php } ?>
                         </p>
                     </td>
                     <td style="width:40%;"></td>
@@ -145,7 +145,7 @@
                             </tr>
                             <?php if ($invoice->invoice_item_tax_total > 0) { ?>
                             <tr>
-                                <td style="text-align: right;"><?php echo lang('item_tax'); ?></td>
+                                <td style="text-align: right;">BTW 21%</td>
                                 <td style="text-align: right;"><?php echo format_currency($invoice->invoice_item_tax_total); ?></td>
                             </tr>
                             <?php } ?>
