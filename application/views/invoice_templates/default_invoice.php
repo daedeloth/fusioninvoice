@@ -67,8 +67,8 @@
                             <?php if ($invoice->user_zip) { echo $invoice->user_zip . '<br>'; } ?>
                             <?php if ($invoice->user_phone) { ?><abbr>P:</abbr><?php echo $invoice->user_phone; ?><br><?php } ?>
                             <?php if ($invoice->user_fax) { ?><abbr>F:</abbr><?php echo $invoice->user_fax; ?><?php } ?>
-
-<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->gebruiker_custom_btw; ?><?php } ?>
+							<?php if ($invoice->gebruiker_custom_btw) { ?><abbr>BTW: </abbr><?php echo $invoice->gebruiker_custom_btw; ?><?php } ?>
+							<?php if ($invoice->gebruiker_custom_rpr) { ?><abbr>RPR: </abbr><?php echo $invoice->gebruiker_custom_rpr; ?><?php } ?>
                         </p>
                     </td>
                     <td style="text-align: right;"><h2><?php echo lang('invoice'); ?> <?php echo $invoice->invoice_number; ?></h2></td>
@@ -181,11 +181,11 @@
 	    <div class="seperator"></div>
 
 		<p>Please transfer this amount to:</p>
-		<p>IBAN: BE52 0015 9115 0109<br />
+		<p>IBAN: BE58 0017 2086 5579<br />
 		BIC: GEBA BE BB<br />
 		CatLab Interactive<br />
-		Edelarendries 4<br />
-		9820 Bottelare
+		Pannestraat 75<br />
+		9000 Gent
 		</p>
 
 		<p>Prettig zakendoen!</p>
