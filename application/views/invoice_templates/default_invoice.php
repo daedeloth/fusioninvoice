@@ -180,7 +180,7 @@
 
 	    <div class="seperator"></div>
 
-		<p>Please transfer this amount to:</p>
+		<p>Graag overschrijven op:</p>
 		<p>IBAN: BE58 0017 2086 5579<br />
 		BIC: GEBA BE BB<br />
 		CatLab Interactive<br />
