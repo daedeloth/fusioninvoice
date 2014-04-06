@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'password';
-$db['default']['database'] = 'fusioninvoice';
+$db['default']['username'] = 'catlab_fusioninv';
+$db['default']['password'] = '[Mq+5XX3NIg3';
+$db['default']['database'] = 'catlab_fusioninvoice';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;

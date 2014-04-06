@@ -11,8 +11,8 @@ if (!defined('BASEPATH'))
  * @package		FusionInvoice
  * @author		Jesse Terry
  * @copyright	Copyright (c) 2012 - 2013, Jesse Terry
- * @license		http://www.fusioninvoice.com/license.txt
- * @link		http://www.fusioninvoice.
+ * @license		http://www.fusioninvoice.com/support/page/license-agreement
+ * @link		http://www.fusioninvoice.com
  * 
  */
 
@@ -24,7 +24,12 @@ class Mailer extends Admin_Controller {
     {
         parent::__construct();
 
-        $this->mailer_configured = ($this->mdl_settings->setting('smtp_server_address')) ? TRUE : FALSE;
+        $this->mailer_configured = ( ($this->mdl_settings->setting('email_send_method') == 'phpmail') OR
+            ($this->mdl_settings->setting('email_send_method') == 'sendmail') OR
+            (($this->mdl_settings->setting('email_send_method') == 'smtp') AND ($this->mdl_settings->setting('smtp_server_address')))
+            );
+
+        $this->load->helper('template');
     }
 
     public function invoice($invoice_id)
@@ -35,12 +40,14 @@ class Mailer extends Admin_Controller {
             {
                 $this->load->helper('phpmailer');
 
-                $invoice = modules::run('invoices/generate_pdf', $invoice_id, FALSE);
+                $invoice = modules::run('invoices/generate_pdf', $invoice_id, FALSE, $this->input->post('invoice_template'));
+
+                $db_invoice = $this->mdl_invoices->where('fi_invoices.invoice_id', $invoice_id)->get()->row();
 
                 $from    = ($this->input->post('from_name')) ? array($this->input->post('from_email'), $this->input->post('from_name')) : $this->input->post('from_email');
                 $to      = $this->input->post('to_email');
                 $subject = $this->input->post('subject');
-                $message = $this->input->post('body');
+                $message = nl2br(parse_template($db_invoice, $this->input->post('body')));
                 $cc      = $this->input->post('to_cc');
                 $bcc     = $this->input->post('to_bcc');
 
@@ -53,7 +60,7 @@ class Mailer extends Admin_Controller {
                     redirect('mailer/invoice/' . $invoice_id);
                 }
 
-                $this->session->set_flashdata('alert_success', 'Email successfully sent');
+                $this->session->set_flashdata('alert_success', lang('email_successfully_sent'));
 
                 redirect('dashboard');
             }
@@ -62,7 +69,9 @@ class Mailer extends Admin_Controller {
             $this->load->model('invoices/mdl_invoices');
             $this->load->model('email_templates/mdl_email_templates');
 
-            if ($email_template_id = $this->mdl_settings->setting('default_email_template'))
+            $email_template_id = $this->mdl_settings->setting('default_email_template');
+
+            if ($email_template_id)
             {
                 $email_template = $this->mdl_email_templates->where('email_template_id', $email_template_id)->get();
 
@@ -91,7 +100,7 @@ class Mailer extends Admin_Controller {
             $this->layout->render();
         }
     }
-    
+
     public function quote($quote_id)
     {
         if ($this->mailer_configured == TRUE)
@@ -100,12 +109,14 @@ class Mailer extends Admin_Controller {
             {
                 $this->load->helper('phpmailer');
 
-                $quote = modules::run('quotes/generate_pdf', $quote_id, FALSE);
+                $quote = modules::run('quotes/generate_pdf', $quote_id, FALSE, $this->input->post('quote_template'));
+
+                $db_quote = $this->mdl_quotes->where('fi_quotes.quote_id', $quote_id)->get()->row();
 
                 $from    = ($this->input->post('from_name')) ? array($this->input->post('from_email'), $this->input->post('from_name')) : $this->input->post('from_email');
                 $to      = $this->input->post('to_email');
                 $subject = $this->input->post('subject');
-                $message = $this->input->post('body');
+                $message = nl2br(parse_template($db_quote, $this->input->post('body')));
                 $cc      = $this->input->post('to_cc');
                 $bcc     = $this->input->post('to_bcc');
 
@@ -118,7 +129,7 @@ class Mailer extends Admin_Controller {
                     redirect('mailer/quote/' . $quote_id);
                 }
 
-                $this->session->set_flashdata('alert_success', 'Email successfully sent');
+                $this->session->set_flashdata('alert_success', lang('email_successfully_sent'));
 
                 redirect('dashboard');
             }
@@ -127,7 +138,9 @@ class Mailer extends Admin_Controller {
             $this->load->model('quotes/mdl_quotes');
             $this->load->model('email_templates/mdl_email_templates');
 
-            if ($email_template_id = $this->mdl_settings->setting('default_email_template'))
+            $email_template_id = $this->mdl_settings->setting('default_email_template');
+
+            if ($email_template_id)
             {
                 $email_template = $this->mdl_email_templates->where('email_template_id', $email_template_id)->get();
 

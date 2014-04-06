@@ -72,5 +72,16 @@
 			<textarea name="settings[default_invoice_terms]" style="width: 400px; height: 150px;"><?php echo $this->mdl_settings->setting('default_invoice_terms'); ?></textarea>
 		</div>
 	</div>
+    
+	<div class="control-group">
+		<label class="control-label"><?php echo lang('invoice_logo'); ?>: </label>
+		<div class="controls">
+            <?php if ($this->mdl_settings->setting('invoice_logo')) { ?>
+            <img src="<?php echo base_url(); ?>uploads/<?php echo $this->mdl_settings->setting('invoice_logo'); ?>"><br>
+            <?php echo anchor('settings/remove_logo/invoice', 'Remove Logo'); ?><br>
+            <?php } ?>
+			<input type="file" name="invoice_logo" size="40" />
+		</div>
+	</div>
 
 </div>

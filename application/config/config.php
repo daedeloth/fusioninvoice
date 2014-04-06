@@ -1,5 +1,7 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+date_default_timezone_set ('Europe/Brussels');
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -26,7 +28,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
